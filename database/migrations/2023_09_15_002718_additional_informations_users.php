@@ -11,15 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('additional_informations_medical', function (Blueprint $table)
+        {
             $table->uuid('id')->primary();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->enum('user_type', ['admin', 'medical', 'patient']);
-            $table->rememberToken();
+            $table->uuid('users_id');
+            $table->integer('crm');
             $table->timestamps();
+
+
+            $table->foreign('users_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+
         });
     }
 
@@ -28,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExistis('additional_informations_medical');
     }
 };
