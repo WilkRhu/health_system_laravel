@@ -1,34 +1,21 @@
 version: '3'
 services:
-  
-  #PHP Service
   app:
     build:
       context: .
       dockerfile: Dockerfile
-    image: digitalocean.com/php
-    container_name: app
-    restart: unless-stopped
-    tty: true
-    environment:
-      SERVICE_NAME: app
-      SERVICE_TAGS: dev
-    working_dir: /var/www
-    networks:
-      - app-network
-
-  #Nginx Service
-  webserver:
-    image: nginx:alpine
-    container_name: webserver
-    restart: unless-stopped
-    tty: true
     ports:
       - "80:80"
-      - "443:443"
-    networks:
-      - app-network
-
+    volumes:
+      - ./laravel-app:/var/www
+    environment:
+      - APP_ENV=local
+      - DB_CONNECTION=mysql
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_DATABASE=laravel
+      - DB_USERNAME=root
+      - DB_PASSWORD=123
   #MySQL Service
   db:
     image: mysql:5.7.22
@@ -40,6 +27,8 @@ services:
     environment:
       MYSQL_DATABASE: laravel
       MYSQL_ROOT_PASSWORD: 123
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 123
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     networks:
