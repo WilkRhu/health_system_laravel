@@ -22,12 +22,8 @@ class UserController extends Controller
     {
         try {
             $user = $this->user->all();
-            if(count($user) > 0) {
-                return response()->json($user, 200);
-            }
-
-            throw new \Exception("There are no registered users!", 404);
-        } catch (\Exception $th) {
+            return response()->json($user, 200);
+        } catch (\Exception $ex) {
             return response()->json([
                 'error_message' => $ex->getMessage(),
                 'status' => $ex->getCode()
@@ -49,6 +45,7 @@ class UserController extends Controller
         }
     }
 
+
     public function update(Request $request, string $id)
     {
 
@@ -67,8 +64,6 @@ class UserController extends Controller
                 return response()->json($user, 201);
             }
 
-            throw new \Exception("User Not Found!", 404);
-
         } catch (\Exception $ex) {
             return response()->json([
                 'error_message' => $ex->getMessage(),
@@ -86,10 +81,7 @@ class UserController extends Controller
            if($user) {
             $user->delete();
             return response()->json("User Deleted Successfully!", 200);
-           } else {
-            throw new \Exception("User Not Found!", 404);
            }
-
         } catch (\Exception $ex) {
             return response()->json([
                 'error_message' => $ex->getMessage(),
