@@ -20,8 +20,9 @@ class LoginService
         return [
             'access_token' => $token,
             'token_type' => 'Bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60,
+            'expires_in' => auth()->factory()->getTTL() * 1440,
             'user' => auth()->user(),
+            'user_type' => auth()->user()->user_type,
         ];
     }
 }

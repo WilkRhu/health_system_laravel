@@ -37,7 +37,7 @@ Route::controller(AuthController::class)->group(function () {
 
 Route::controller(UserController::class)->group(function () {
     Route::get('/user', 'index');
-    Route::get('/user/{id}', 'show');
-    Route::put('/user/{id}', 'update');
-    Route::delete('/user/{id}', 'destroy');
+    Route::get('/user/show/{id}', 'show');
+    Route::put('/user/update/{id}', 'update');
+    Route::delete('/user/destroy/{id}', 'destroy');
 });

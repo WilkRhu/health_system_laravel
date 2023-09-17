@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
 use Exception;;
 
+
 class UserController extends Controller
 {
 
