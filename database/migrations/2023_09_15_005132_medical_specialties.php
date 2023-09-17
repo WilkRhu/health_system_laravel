@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreign('users_id')
                 ->references('id')
                 ->on('users')
-                ->onDelete('cascade')->constrained('users')->default(null);
+                ->onDelete('cascade');
 
             $table->foreign('specialties_id')
                 ->references('id')

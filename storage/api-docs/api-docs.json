@@ -569,6 +569,167 @@
                     }
                 ]
             }
+        },
+        "/api/healthinsurance/create": {
+            "post": {
+                "summary": "Register Health Insurance User Patient",
+                "tags": [
+                    "Health Insurance"
+                ],
+                "parameters": [
+                    {
+                        "name": "description",
+                        "in": "query",
+                        "description": "Description Health Insurance",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "phone",
+                        "in": "query",
+                        "description": "Phone of Health Insurance",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Return map success created"
+                    }
+                }
+            }
+        },
+        "/api/healthinsurance": {
+            "get": {
+                "summary": "All Health Insurance",
+                "tags": [
+                    "Health Insurance"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns a list of Health Insurance"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/healthinsurance/{id}": {
+            "get": {
+                "summary": "Get Health Insurance for id",
+                "tags": [
+                    "Health Insurance"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Helth Insurance ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Return health insurance by id"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/healthinsurance/update/{id}": {
+            "put": {
+                "summary": "Update Health Insurance",
+                "tags": [
+                    "Health Insurance"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Helth Insurance ID"
+                    },
+                    {
+                        "name": "description",
+                        "in": "query",
+                        "description": "Description Health Insurance",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "phone",
+                        "in": "query",
+                        "description": "Phone of Health Insurance",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Return map success created"
+                    }
+                }
+            }
+        },
+        "/api/healthinsurance/destroy/{id}": {
+            "delete": {
+                "summary": "Delete health insurance for id",
+                "tags": [
+                    "Health Insurance"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Health Insurance ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Health Insurance Deleted Successfully!"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -596,6 +757,10 @@
         {
             "name": "Medical Specialties",
             "description": "CRUD medical specialties"
+        },
+        {
+            "name": "Health Insurance",
+            "description": "CRUD health insurance"
         }
     ]
 }
