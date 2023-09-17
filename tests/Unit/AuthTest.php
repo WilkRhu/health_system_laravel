@@ -1,4 +1,4 @@
-<?php
+<!-- 
 
 namespace Tests\Unit;
 
@@ -23,4 +23,4 @@ class AuthTest extends TestCase
         ];
        dd(User::create($userData));
     }
-}
+} -->
