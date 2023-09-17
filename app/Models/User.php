@@ -48,6 +48,10 @@ class User extends Authenticatable implements JWTSubject
         'remember_token'
     ];
 
+    public $rolesUserUpdate = [
+        "email" =>  "email:rfc,dns|unique:users"
+    ];
+
     /**
      * The attributes that should be cast.
      *

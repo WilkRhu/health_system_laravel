@@ -34,3 +34,10 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('logout', 'logout');
     Route::post('refresh', 'refresh');
 });
+
+Route::controller(UserController::class)->group(function () {
+    Route::get('/user', 'index');
+    Route::get('/user/{id}', 'show');
+    Route::put('/user/{id}', 'update');
+    Route::delete('/user/{id}', 'destroy');
+});

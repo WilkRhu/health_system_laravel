@@ -7,7 +7,7 @@ use App\Services\Auth\LoginService;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
-use App\Exceptions;
+use Exceptions;
 
 class AuthController extends Controller
 {
@@ -47,11 +47,11 @@ class AuthController extends Controller
                 "message" => 'User Created Successfully',
                 "user" => $user
             ]);
-        } catch (Exception $ex) {
-           return response()->json([
-            'error' => true,
-            'error_message' => $ex
-           ]);
+        } catch (\Exception $ex) {
+            return response()->json([
+                'error_message' => $ex->getMessage(),
+                'status' => $ex->getCode()
+               ]);
         }
     }
 
