@@ -19,6 +19,14 @@ return new class extends Migration
             $table->string('password');
             $table->enum('user_type', ['admin', 'medical', 'patient']);
             $table->rememberToken();
+
+            // Field CRM User Medical
+            $table->string('medical_crm')->nullable();
+
+            // Field User Patient
+            $table->date('date_of_birth_patient')->nullable();
+            $table->string('phone_number_patient')->nullable();
+
             $table->timestamps();
         });
     }

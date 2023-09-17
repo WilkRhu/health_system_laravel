@@ -15,6 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->uuid('users_id');
             $table->uuid('specialties_id');
+            $table->timestamps();
 
             $table->foreign('users_id')
                 ->references('id')
