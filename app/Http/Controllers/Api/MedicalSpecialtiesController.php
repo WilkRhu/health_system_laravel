@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\MedicalSpecialties;
+use App\Models\Specialties;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -10,34 +12,56 @@ class MedicalSpecialtiesController extends Controller
 {
     private $medicalSpecialties;
     private $user;
+    private $specialties;
     
-    public function __construct(MedicalSpecialties $medicalSpecialties, User $user)
+    public function __construct(
+        MedicalSpecialties $medicalSpecialties, 
+        User $user, 
+        Specialties $specialties
+        )
     {
         $this->medicalSpecialties = $medicalSpecialties;
         $this->user  = $user;
+        $this->specialties = $specialties;
     }
 
-   
+    public function index()
+    {
+        try {
+            $medicalSpecialties = $this->medicalSpecialties->all();
+            return response()->json($medicalSpecialties, 200);
+        } catch (\Exception $ex) {
+            return response()->json([
+                'error_message' => $ex->getMessage(),
+                'status' => $ex->getCode()
+               ]);
+        }
+    }
+
   
     public function store(Request $request)
     {
         try {
-            $validate = validator($request->all(), $this->medicalSpecialties->rules);
-            if($validate->fails()) {
-                return response()
-                    ->json($validate->errors(), 400);
-            } 
-            $medicalSpecialties = $this->specialties->create([
-                "user_id" => $request->user_id,
-                "specialties_id" => $request->specialties_id
-            ]);
+            $user = $this->user->find($request->users_id);
+            $name_specialties = $this->specialties->find($request->specialties_id);
 
-            $user = $this->user->find($request->user_id);
-            return response()->json([
-                "specialties_type" => $specialties,
-                "message" => 'Medical Specialties Created Successfully',
-                "user_name" => $user->name
-            ]);
+            if($user->user_type === 'medical') {
+                $validate = validator($request->all(), $this->medicalSpecialties->rules);
+                if($validate->fails()) {
+                    return response()
+                        ->json($validate->errors(), 400);
+                } 
+                $medicalSpecialties = $this->medicalSpecialties->create([
+                    "users_id" => $request->users_id,
+                    "specialties_id" => $request->specialties_id
+                ]);
+    
+                return response()->json([
+                    "created" => ["user" =>  $user, "medical_specialties" => $name_specialties->specialties_type],
+                    "message" => 'Medical Specialties Created Successfully',
+                ]);
+            }
+            throw new \Exception('This user is not the medical type', 400);
         } catch (\Exception $ex) {
             return response()->json([
                 'error_message' => $ex->getMessage(),
@@ -47,25 +71,36 @@ class MedicalSpecialtiesController extends Controller
     }
 
    
-    public function show(MedicalSpecialties $medicalSpecialties)
+    public function show(string $id)
     {
-        //
+        try {
+            $medicalSpecialties = $this->medicalSpecialties->find($id);
+            return response()->json($medicalSpecialties, 200);
+        } catch (\Exception $ex) {
+            return response()->json([
+                'error_message' => $ex->getMessage(),
+                'status' => $ex->getCode()
+               ]);
+        }
     }
 
   
     /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, MedicalSpecialties $medicalSpecialties)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MedicalSpecialties $medicalSpecialties)
+    public function destroy(string $id)
     {
-        //
+        try {
+            $medicalSpecialties = $this->medicalSpecialties->find($id);
+            if($medicalSpecialties) {
+             $medicalSpecialties->delete();
+             return response()->json("Medical Specialties Deleted Successfully!", 200);
+            }
+         } catch (\Exception $ex) {
+             return response()->json([
+                 'error_message' => $ex->getMessage(),
+                 'status' => $ex->getCode()
+             ]);
+         }
     }
 }

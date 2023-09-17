@@ -455,6 +455,120 @@
                     }
                 ]
             }
+        },
+        "/api/medicalspecialties/create": {
+            "post": {
+                "summary": "Create medicalspecialties",
+                "tags": [
+                    "Medical Specialties"
+                ],
+                "parameters": [
+                    {
+                        "name": "users_id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "User ID"
+                    },
+                    {
+                        "name": "specialties_id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Specialties ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Medical Specialties Created Successfully"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/medicalspecialties": {
+            "get": {
+                "summary": "Get All Specialties",
+                "tags": [
+                    "Medical Specialties"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns a list of specialties"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/medicalspecialties/{id}": {
+            "get": {
+                "summary": "Get Specialties for id",
+                "tags": [
+                    "Medical Specialties"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Medical Specialties ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Return specialty by id"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/medicalspecialties/destroy/{id}": {
+            "delete": {
+                "summary": "Delete Medical Specialties for id",
+                "tags": [
+                    "Medical Specialties"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Specialties ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Medical Specialties Deleted Successfully!"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {

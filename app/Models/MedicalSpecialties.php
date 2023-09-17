@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class MedicalSpecialties extends Model
 {
@@ -22,13 +23,13 @@ class MedicalSpecialties extends Model
     }
 
     protected $fillable = [
-        "user_id",
+        "users_id",
         "specialties_id"
     ];
 
     public $rules = [
-        "user_id" => "required|max:60|min:3",
-        "specialties_id" => "required|max:60|min:3",
+        "users_id" => "required|string",
+        "specialties_id" => "required|string",
     ];
 
 }

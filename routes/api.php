@@ -56,6 +56,9 @@ Route::controller(SpecialtiesController::class)->group(function () {
 })->middleware('auth:api', 'jwt.admin');
 
 Route::controller(MedicalSpecialtiesController::class)->group(function (){
+    Route::get('/medicalspecialties', 'index');
     Route::post('/medicalspecialties/create', 'store');
-})->middleware('auth:api', 'jwt.admin');
+    Route::get('/medicalspecialties/{id}', 'show');
+    Route::delete('/medicalspecialties/destroy/{id}', 'destroy');
+})->middleware('jwt.admin');
 
