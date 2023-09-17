@@ -52,6 +52,33 @@
                                 "patient"
                             ]
                         }
+                    },
+                    {
+                        "name": "medical_crm",
+                        "in": "query",
+                        "description": "User type 'medical' or 'admin'",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "date_of_birth_patient",
+                        "in": "query",
+                        "description": "User type 'patient' or 'admin'",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "phone_number_patient",
+                        "in": "query",
+                        "description": "User type 'patient' or 'admin'",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
@@ -146,7 +173,12 @@
                     "200": {
                         "description": "Returns a list of registered users"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/api/user/show/{id}": {
@@ -170,7 +202,12 @@
                     "200": {
                         "description": "Returns a list of registered users"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/api/user/update/{id}": {
@@ -181,10 +218,19 @@
                 ],
                 "parameters": [
                     {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "User ID"
+                    },
+                    {
                         "name": "name",
                         "in": "query",
                         "description": "User's name",
-                        "required": true,
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -193,24 +239,47 @@
                         "name": "password",
                         "in": "query",
                         "description": "User's password",
-                        "required": true,
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
                     },
                     {
-                        "name": "user_type",
+                        "name": "medical_crm",
                         "in": "query",
-                        "description": "User type ['admin', 'medical', 'patient']",
+                        "description": "User type 'medical' or 'admin'",
                         "required": false,
                         "schema": {
-                            "type": "string",
-                            "enum": [
-                                "admin",
-                                "medical",
-                                "patient"
-                            ]
+                            "type": "string"
                         }
+                    },
+                    {
+                        "name": "date_of_birth_patient",
+                        "in": "query",
+                        "description": "User type 'patient' or 'admin'",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "phone_number_patient",
+                        "in": "query",
+                        "description": "User type 'patient' or 'admin'",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User edited Successfully!"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
                     }
                 ]
             }
@@ -236,7 +305,269 @@
                     "200": {
                         "description": "User Deleted Successfully!"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/specialties/create": {
+            "post": {
+                "summary": "Create Specialties",
+                "tags": [
+                    "Specialties"
+                ],
+                "parameters": [
+                    {
+                        "name": "specialties_type",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Specialties Types Ex: Geriatrics"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Specialties Created Successfully"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/specialties": {
+            "get": {
+                "summary": "Get All Specialties",
+                "tags": [
+                    "Specialties"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns a list of specialties"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/specialties/{id}": {
+            "get": {
+                "summary": "Get Specialties for id",
+                "tags": [
+                    "Specialties"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Specialties ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Return specialty by id"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/specialties/update/{id}": {
+            "put": {
+                "summary": "Create Specialties",
+                "tags": [
+                    "Specialties"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Specialties ID"
+                    },
+                    {
+                        "name": "specialties_type",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Specialties Types Ex: Geriatrics"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns the updated specialty"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/specialties/destroy/{id}": {
+            "delete": {
+                "summary": "Delete Specialties for id",
+                "tags": [
+                    "Specialties"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Specialties ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Specialties Deleted Successfully!"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/medicalspecialties/create": {
+            "post": {
+                "summary": "Create medicalspecialties",
+                "tags": [
+                    "Medical Specialties"
+                ],
+                "parameters": [
+                    {
+                        "name": "users_id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "User ID"
+                    },
+                    {
+                        "name": "specialties_id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Specialties ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Medical Specialties Created Successfully"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/medicalspecialties": {
+            "get": {
+                "summary": "Get All Specialties",
+                "tags": [
+                    "Medical Specialties"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns a list of specialties"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/medicalspecialties/{id}": {
+            "get": {
+                "summary": "Get Specialties for id",
+                "tags": [
+                    "Medical Specialties"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Medical Specialties ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Return specialty by id"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/medicalspecialties/destroy/{id}": {
+            "delete": {
+                "summary": "Delete Medical Specialties for id",
+                "tags": [
+                    "Medical Specialties"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Specialties ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Medical Specialties Deleted Successfully!"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         }
     },
@@ -257,6 +588,14 @@
         {
             "name": "User",
             "description": "Routes Users"
+        },
+        {
+            "name": "Specialties",
+            "description": "Medical Specialties"
+        },
+        {
+            "name": "Medical Specialties",
+            "description": "CRUD medical specialties"
         }
     ]
 }
