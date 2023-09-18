@@ -38,7 +38,8 @@ class ProceduresController extends Controller
                     ->json($validate->errors(), 400);
             } 
             $procedures = $this->procedures->create([
-                "procedure_name" => $request->procedure_name
+                "procedure_name" => $request->procedure_name,
+                "procedure_value" => $request->procedure_value
             ]);
             return response()->json([
                 "procedure" => $procedures,

@@ -739,6 +739,51 @@
                 ],
                 "parameters": [
                     {
+                        "name": "user_id_medical",
+                        "in": "query",
+                        "description": "User id medical",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "user_id_patient",
+                        "in": "query",
+                        "description": "User id patient",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "procedures_id",
+                        "in": "query",
+                        "description": "Procedures ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "date",
+                        "in": "query",
+                        "description": "Date format '2023-09-18'",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "hours",
+                        "in": "query",
+                        "description": "Hours format '14:30:00'",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
                         "name": "private",
                         "in": "query",
                         "description": "Private type [true, false]",
@@ -897,6 +942,15 @@
                             "type": "string"
                         },
                         "description": "Procedure Name"
+                    },
+                    {
+                        "name": "procedure_value",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Procedure Value ex: 200"
                     }
                 ],
                 "responses": {

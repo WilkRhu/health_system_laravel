@@ -5,14 +5,20 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Appointment;
+use App\Services\AppointmentsServices;
 
 class AppointmentController extends Controller
 {
     
     private $appointment;
+    private $appointment_service;
 
-    public function __construct(Appointment $appointment) {
+    public function __construct(
+        Appointment $appointment,
+        AppointmentsServices $appointment_service
+        ) {
         $this->appointment = $appointment;
+        $this->appointment_service = $appointment_service;
     }
 
     public function index()
@@ -32,22 +38,24 @@ class AppointmentController extends Controller
     public function store(Request $request)
     {
         try {
-            $privateString = $request->input('private');
-            $private = filter_var($privateString, FILTER_VALIDATE_BOOLEAN);
-            $request->merge(['private' => $private]);
-
             $validate = validator($request->all(), $this->appointment->rules);
 
             if ($validate->fails()) {
                 return response()
                     ->json($validate->errors(), 400);
             }
-
             $appointment = $this->appointment->create([
-                "private" => $request->private
+                "user_id_medical" => $request->user_id_medical,
+                "user_id_patient" => $request->user_id_patient,
+                "procedures_id" => $request->procedures_id,
+                "date" => $request->date,
+                "hours" => $request->hours,
+                "private" => $request->private,
             ]);
+            $appointment_return = $this->appointment_service
+                                        ->handle_return_appointment($appointment);
             return response()->json([
-                "appointment" => $appointment,
+                "appointment" => $appointment_return,
                 "message" => 'Appointment Created Successfully'
             ]);
         } catch (\Exception $ex) {

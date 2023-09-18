@@ -23,10 +23,20 @@ class Appointment extends Model
     }
 
     protected $fillable = [
+        "user_id_medical",
+        "user_id_patient",
+        "procedures_id",
+        "date",
+        "hours",
         "private"
     ];
 
     public $rules = [
-        "private" => "required|string"
+        "user_id_medical" => "required|string",
+        "user_id_patient" => "required|string",
+        "procedures_id" => "required|string",
+        "date" => "string",
+        "hours" => "string",
+        "private" => "required|string",
     ];
 }
