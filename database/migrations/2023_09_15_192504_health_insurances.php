@@ -11,11 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('health_insurance', function (Blueprint $table) {
-            $table->uuid('id');
+        Schema::create('health_insurances', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->uuid('users_id');
             $table->string('description');
             $table->string('phone');
+            $table->string('contract_number');
             $table->timestamps();
+
+            $table->foreign('users_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 
@@ -24,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExistis('health_insurance');
+        Schema::dropIfExistis('health_insurances');
     }
 };

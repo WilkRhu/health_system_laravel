@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Str;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Validation\Rule;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -49,7 +50,10 @@ class User extends Authenticatable implements JWTSubject
     ];
 
     public $rolesUserUpdate = [
-        "email" =>  "email:rfc,dns|unique:users"
+        "email" =>  "email:rfc,dns|unique:users",
+        "medical_crm" => "nullable|string",
+        "date_of_birth_patient" => "nullable|string",
+        "phone_number_patient" => "nullable|string",
     ];
 
     /**
@@ -74,6 +78,8 @@ class User extends Authenticatable implements JWTSubject
      */
     public function getJWTCustomClaims()
     {
-        return [];
+        return [
+            'user_type' => $this->user_type
+        ];
     }
 }

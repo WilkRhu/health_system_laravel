@@ -11,19 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('additional_informations_medical', function (Blueprint $table)
-        {
-            $table->uuid('id')->primary();
+        Schema::create('appointments_patient', function (Blueprint $table) {
             $table->uuid('users_id');
-            $table->integer('crm');
-            $table->timestamps();
-
+            $table->uuid('appointments_id');
 
             $table->foreign('users_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
 
+            $table->foreign('appointments_id')
+                ->references('id')
+                ->on('appointments')
+                ->onDelete('cascade');
         });
     }
 
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExistis('additional_informations_medical');
+        Schema::dropIfExistis('appointments_patient');
     }
 };

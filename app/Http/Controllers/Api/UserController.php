@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
-use Exception;;
+use Exception;
+
 
 class UserController extends Controller
 {
@@ -57,6 +58,7 @@ class UserController extends Controller
             }
 
             $user = $this->user->find($id);
+            
             if($user) {
                 $date = $request->all();
                 $user->update($date);

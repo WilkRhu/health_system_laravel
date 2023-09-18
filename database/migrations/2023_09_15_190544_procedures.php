@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('procedure', function (Blueprint $table) {
-            $table->uuid('id');
+        Schema::create('procedures', function (Blueprint $table) {
+            $table->uuid('id')->primary();
             $table->string('procedure_name');
-            $table->increments('procedure_value');
+            $table->string('procedure_value');
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExistis('procedure');
+        Schema::dropIfExistis('procedures');
     }
 };
