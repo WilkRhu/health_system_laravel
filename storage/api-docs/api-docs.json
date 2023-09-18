@@ -730,6 +730,157 @@
                     }
                 ]
             }
+        },
+        "/api/appointment/create": {
+            "post": {
+                "summary": "Create Appointment",
+                "tags": [
+                    "Appointments"
+                ],
+                "parameters": [
+                    {
+                        "name": "private",
+                        "in": "query",
+                        "description": "Private type [true, false]",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "true",
+                                "false"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Return health insurance by id"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/appointment": {
+            "get": {
+                "summary": "Get All Appointments",
+                "tags": [
+                    "Appointments"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns a list of appointments"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/appointment/{id}": {
+            "get": {
+                "summary": "Get Appointments for id",
+                "tags": [
+                    "Appointments"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Apponintments ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Return appointment by id"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/appointment/update/{id}": {
+            "put": {
+                "summary": "Create Appointment",
+                "tags": [
+                    "Appointments"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Apponintments ID"
+                    },
+                    {
+                        "name": "private",
+                        "in": "query",
+                        "description": "Private type [true, false]",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "true",
+                                "false"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Return appointment by id"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/appointment/destroy/{id}": {
+            "delete": {
+                "summary": "Delete Appointment for id",
+                "tags": [
+                    "Appointments"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Appointment ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Appointment Deleted Successfully!"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -761,6 +912,10 @@
         {
             "name": "Health Insurance",
             "description": "CRUD health insurance"
+        },
+        {
+            "name": "Appointments",
+            "description": "Created Appointment"
         }
     ]
 }

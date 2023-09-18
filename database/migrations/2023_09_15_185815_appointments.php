@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('procedure', function (Blueprint $table) {
+        Schema::create('appointments', function (Blueprint $table) {
             $table->uuid('id');
-            $table->string('procedure_name');
-            $table->increments('procedure_value');
+            $table->enum('private', ['true', 'false'])->default('true');
             $table->timestamps();
         });
     }
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExistis('procedure');
+        Schema::dropIfExistis('appointments');
     }
 };

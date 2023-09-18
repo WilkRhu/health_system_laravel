@@ -2,11 +2,13 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\AppointmentController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\MedicalSpecialtiesController;
 use App\Http\Controllers\Api\HealthInsuranceController;
 use App\Http\Controllers\Api\SpecialtiesController;
+use App\Http\Controllers\Api\UserController;
+
 
 
 /*
@@ -37,15 +39,31 @@ Route::middleware(['jwt.admin.and.user'])->group(function () {
     Route::get('/', function (){
         return response()->json(['api_name' => 'laravel-app', 'api_version' => '1.0.0']);
     });
-    // ============== User ===============//
+    /**
+     * Autentications
+     */
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::post('logout', [AuthController::class, 'logout']);
-    // ====================================== //
+    /** */
 
+    /**
+     * Users
+     */
     Route::get('/user', [UserController::class, 'index']);
     Route::get('/user/show/{id}', [UserController::class, 'show']);
     Route::put('/user/update/{id}', [UserController::class, 'update']);
     Route::delete('/user/destroy/{id}', [UserController::class, 'destroy']);
+    /** */
+
+    /**
+     * Appointment
+     */
+    Route::post('/appointment/create', [AppointmentController::class, 'store']);
+    Route::get('/appointment', [AppointmentController::class, 'index']);
+    Route::get('/appointment/{id}', [AppointmentController::class, 'show']);
+    Route::put('/appointment/update/{id}', [AppointmentController::class, 'update']);
+    Route::delete('/appointment/destroy/{id}', [AppointmentController::class, 'destroy']);
+    /** */
 
 });
 
