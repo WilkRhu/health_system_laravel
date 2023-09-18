@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\MedicalSpecialtiesController;
 use App\Http\Controllers\Api\HealthInsuranceController;
 use App\Http\Controllers\Api\SpecialtiesController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\ProceduresController;
 
 
 
@@ -97,5 +98,15 @@ Route::middleware(['jwt.admin'])->group(function (){
     Route::put('/healthinsurance/update/{id}', [HealthInsuranceController::class, 'update']);
     Route::delete('/healthinsurance/destroy/{id}', [HealthInsuranceController::class, 'destroy']);
     /** */
+
+    /**
+     * Procedures
+     */
+
+     Route::post('/procedures/create', [ProceduresController::class, 'store']);
+     Route::get('/procedures', [ProceduresController::class, 'index']);
+     Route::get('/procedures/{id}', [ProceduresController::class, 'show']);
+    Route::delete('/procedures/destroy/{id}', [ProceduresController::class, 'destroy']);
+     /** */
 });
 
