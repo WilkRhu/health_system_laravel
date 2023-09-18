@@ -881,6 +881,111 @@
                     }
                 ]
             }
+        },
+        "/api/procedures/create": {
+            "post": {
+                "summary": "Create Appointment",
+                "tags": [
+                    "Procedures"
+                ],
+                "parameters": [
+                    {
+                        "name": "procedure_name",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Procedure Name"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Return array Procedure"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/procedures": {
+            "get": {
+                "summary": "Get All Procedures",
+                "tags": [
+                    "Procedures"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns a list of Procedures"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/procedures/{id}": {
+            "get": {
+                "summary": "Get Procedures for id",
+                "tags": [
+                    "Procedures"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Procedures ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Return specialty by id"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/procedures/destroy/{id}": {
+            "delete": {
+                "summary": "Delete Procedures for id",
+                "tags": [
+                    "Procedures"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Procedures ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Procedures Deleted Successfully!"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -916,6 +1021,10 @@
         {
             "name": "Appointments",
             "description": "Created Appointment"
+        },
+        {
+            "name": "Procedures",
+            "description": "Created Procedures"
         }
     ]
 }
