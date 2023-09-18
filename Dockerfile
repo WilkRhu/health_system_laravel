@@ -50,10 +50,10 @@ USER www
 COPY nginx/app.conf /etc/nginx/app.conf
 
 # Expose port 80 for Nginx (configure this when running the container)
-# EXPOSE 80
+EXPOSE 80
 
 # Start PHP-FPM (entrypoint)
 ENTRYPOINT ["php-fpm"]
 
 # Use the following command to start Nginx and PHP-FPM together when running the container
-# CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx", "-g", "daemon off;"]

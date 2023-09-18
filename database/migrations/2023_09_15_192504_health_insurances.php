@@ -13,9 +13,16 @@ return new class extends Migration
     {
         Schema::create('health_insurances', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->uuid('users_id');
             $table->string('description');
             $table->string('phone');
+            $table->string('contract_number');
             $table->timestamps();
+
+            $table->foreign('users_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 

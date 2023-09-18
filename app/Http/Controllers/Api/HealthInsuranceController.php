@@ -5,16 +5,19 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\HealthInsurance;
+use App\Services\HealthInsuranceService;
 
 class HealthInsuranceController extends Controller
 {
 
     private $healthInsurance;
+    private $healthInsuranceService;
   
     
-    public function __construct(HealthInsurance $healthInsurance)
+    public function __construct(HealthInsurance $healthInsurance, HealthInsuranceService $healthInsuranceService)
     {
         $this->healthInsurance = $healthInsurance;
+        $this->healthInsuranceService = $healthInsuranceService;
     }
 
   
@@ -41,14 +44,8 @@ class HealthInsuranceController extends Controller
                     ->json($validate->errors(), 400);
             }
 
-            $healthInsurance = $this->healthInsurance->create([
-                "description" => $request->description,
-                "phone" => $request->phone
-            ]);
-            return response()->json([
-                "specialties_type" => $healthInsurance,
-                "message" => 'Health Insurance Created Successfully'
-            ]);
+            $healthInsurance = $this->healthInsuranceService->handle_insurance($request->all());
+            return response()->json($healthInsurance, 200);
         } catch (\Exception $ex) {
             return response()->json([
                 'error_message' => $ex->getMessage(),

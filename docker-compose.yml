@@ -1,12 +1,12 @@
 version: '3'
 services:
-  
+
   #PHP Service
   app:
     build:
       context: .
       dockerfile: Dockerfile
-    image: digitalocean.com/php
+    image: laravel-app
     container_name: app
     restart: unless-stopped
     tty: true
@@ -18,16 +18,14 @@ services:
       - app-network
 
   #Nginx Service
-  webserver:
+  web:
     image: nginx:alpine
-    container_name: webserver
-    restart: unless-stopped
-    tty: true
     ports:
       - "80:80"
-      - "443:443"
-    networks:
-      - app-network
+    volumes:
+      - ./public:/var/www/public
+    depends_on:
+      - app
 
   #MySQL Service
   db:
