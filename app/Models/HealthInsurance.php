@@ -24,16 +24,22 @@ class HealthInsurance extends Model
 
     protected $fillable = [
         "description",
-        "phone"
+        "phone",
+        "users_id",
+        "contract_number"
     ];
 
     public $rules = [
         "description" => "required|string",
         "phone" => "required|string",
+        "users_id" => "required|string",
+        "contract_number" => "required|string"
     ];
 
     public $rulesUpdate = [
         "description" => "string",
         "phone" => "string",
+        "users_id" => "string",
+        "contract_number" => "string"
     ];
 }
