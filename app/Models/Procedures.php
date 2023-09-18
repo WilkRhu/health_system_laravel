@@ -28,6 +28,7 @@ class Procedures extends Model
     ];
 
     public $rules = [
-        "procedure_name" => "string|required"
+        "procedure_name" => "string|required",
+        "procedure_value" => "string|required"
     ];
 }
