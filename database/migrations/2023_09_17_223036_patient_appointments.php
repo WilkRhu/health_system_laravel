@@ -11,18 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('appointment', function (Blueprint $table) {
+        Schema::create('patient_appointments', function (Blueprint $table) {
             $table->uuid('id');
             $table->enum('private', [true, false])->default(true);
             $table->timestamps();
-        });
-    }
+        });    }
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExistis('appointment');
+        Schema::dropIfExistis('patient_appointments');
     }
 };
