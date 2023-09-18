@@ -48,7 +48,7 @@ class AuthController extends Controller
             return response()->json([
                 "message" => 'User Created Successfully',
                 "user" => $user
-            ]);
+            ], 201);
         } catch (\Exception $ex) {
             return response()->json([
                 'error_message' => $ex->getMessage(),
