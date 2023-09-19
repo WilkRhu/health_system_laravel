@@ -19,7 +19,7 @@ Criar CRUDS para cadastros de usuários de três tipos ['admin', 'medical', 'pat
 ## JWT:
 Para melhor utilização do sistema será nescessário realizar alguns passos
 
-Primeiramente a instalação do JWT </br>
+Primeiramente a instalação do JWT Auth</br>
 <code>composer require php-open-source-saver/jwt-auth</code>
 
 Apos a instalação do jwt-auth </br>
@@ -34,7 +34,7 @@ Será criado uma chave no seu arquivo .env </br>
 
 <h2 id="route">Rotas</h2>
 
-As unicas rotas que não prcisam de envio de envio do token são as rotas de register e login.
+As unicas rotas que não precisam da inclusão do token são as rotas de register e login.
 
 Para teste do sistema foi criado uma documentação via swagger </br>
 
@@ -46,7 +46,7 @@ Você encontrará todas as rotas disponíveis para utilização do fluxo complet
 
 ## User Routes And Authentications
 
-Para registrar o usuário só é nescessário o preechimento dos campos requeridos, de preferência a criação de um user_type 'admin', pois seu token terá acesso ao restante das rotas.
+Para registrar o usuário só é nescessário o preechimento dos campos requeridos, de preferência a criação de um user_type 'admin', pois esse token terá acesso total para os teste de cadastro.
 
 <img src="https://user-images.githubusercontent.com/29145254/268829801-25ddec78-d478-4194-93a8-6a9f0817c7e1.png" />
 
